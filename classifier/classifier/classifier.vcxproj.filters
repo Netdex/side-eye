@@ -15,15 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="classifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="winsw.cpp">
+    <ClCompile Include="svm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="winsw.h">
+    <ClInclude Include="svm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="classifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

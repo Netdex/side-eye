@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{EE56D1CF-D988-4728-9F6C-5E8962D23A2F}</ProjectGuid>
-    <RootNamespace>winsw</RootNamespace>
+    <ProjectGuid>{2E2E72DF-7477-4C06-BA7A-3A66C0AE4BDB}</ProjectGuid>
+    <RootNamespace>classifier</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,11 +111,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="winsw.cpp" />
+    <ClCompile Include="classifier.cpp" />
+    <ClCompile Include="svm.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="winsw.h" />
+    <ClInclude Include="classifier.h" />
+    <ClInclude Include="svm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
