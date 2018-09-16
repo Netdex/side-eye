@@ -13,8 +13,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void keyPressEvent(QKeyEvent *event);
     void keyReleaseEvent(QKeyEvent *event);
-    std::vector<int> query_display_ids();
-    bool set_active_display(int displayId);
 private slots:
     void onLeftClick();
     void onCentreClick();
