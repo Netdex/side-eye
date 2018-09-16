@@ -5,6 +5,9 @@
 #include "constants.h"
 #include "findEyeCenter.h"
 #include "findEyeCorner.h"
+#include "classifier.h"
+#include <opencv2/imgproc/imgproc.hpp>
+#include "winsw.h"
 
 cv::String faceCascadeFilePath = "haarcascade_frontalface_alt.xml";
 cv::CascadeClassifier faceCascade;
@@ -80,7 +83,7 @@ Position findEyes(cv::Mat frame) {
 	}
 
 	// No faces found
-	return Position{0.0, 0.0};
+	return Position{ 0.0, 0.0 };
 }
 
 int main(int argc, const char** argv) {
@@ -100,9 +103,24 @@ int main(int argc, const char** argv) {
 	cv::namedWindow("Right Eye", CV_WINDOW_NORMAL);
 	cv::moveWindow("Right Eye", 800, 0);
 
+	int step = 0;
+	int count = 0;
+
+	double features[10][2] = { 0 };
+	double labels[] = { 0,0,0,0,0,1,1,1,1,1 };
+	std::vector<int> displays = query_display_ids();
+	std::cout << "detect " << displays.size() << " displays" << std::endl;
+	int cdisplay = displays[0];
+	for(auto i : displays)
+	{
+		std::cout << i << " ";
+	}
+	std::cout << std::endl;
+
 	// Start capturing
 	createCornerKernels();
 	cv::VideoCapture capture(0);
+	svm_classifier *cls = nullptr;
 	while (capture.isOpened()) {
 		cv::Mat frame;
 		capture.read(frame);
@@ -113,13 +131,45 @@ int main(int argc, const char** argv) {
 			break;
 		}
 
+		if (count >= 5)
+		{
+			count = 0;
+			if (step < 2)
+				step++;
+			if (step == 2 && !cls)
+			{
+				cls = new svm_classifier(10, features, labels);
+			}
+		}
+
 		Position pupilsPosition = findEyes(frame);
-		std::cout << pupilsPosition.x << ", " << pupilsPosition.y << std::endl;
+
+		switch (step)
+		{
+		case 0:
+		case 1:
+			std::cout << "step: " << step << " - count: " << count << std::endl;
+			features[step * 5 + count][0] = pupilsPosition.x;
+			features[step * 5 + count][1] = pupilsPosition.y;
+			cv::waitKey(0);
+			break;
+		case 2:
+			int cl = cls->classify(pupilsPosition.x, pupilsPosition.y);
+			std::cout << "predict: " <<  cl << std::endl;
+			if(displays[cl] != cdisplay)
+			{
+				cdisplay = displays[cl];
+				set_active_display(cdisplay);
+			}
+			cv::waitKey(50);
+			break;
+		}
 
 		imshow("Webcam", frame);
 
-		char c = (char) cv::waitKey(25);
-		if (c == 'q') break;
+		count++;
+
+		
 	}
 	releaseCornerKernels();
 
