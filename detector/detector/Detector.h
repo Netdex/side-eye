@@ -18,5 +18,5 @@ private:
 
 public:
 	Detector();
-	Position samplePupilsPosition(int frames = 10);
+	Position samplePupilsPosition(int frames = 5);
 };
