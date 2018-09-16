@@ -116,18 +116,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="classifier.cpp" />
     <ClCompile Include="Detector.cpp" />
     <ClCompile Include="findEyeCenter.cpp" />
     <ClCompile Include="findEyeCorner.cpp" />
     <ClCompile Include="helpers.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="svm.cpp" />
+    <ClCompile Include="winsw.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="classifier.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="Detector.h" />
     <ClInclude Include="findEyeCenter.h" />
     <ClInclude Include="findEyeCorner.h" />
     <ClInclude Include="helpers.h" />
+    <ClInclude Include="svm.h" />
+    <ClInclude Include="winsw.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="haarcascade_eye_tree_eyeglasses.xml" />
