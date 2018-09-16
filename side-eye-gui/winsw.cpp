@@ -57,12 +57,11 @@ BOOL CALLBACK MonitorSetProc(
 							INPUT input = { 0 };
 							input.type = INPUT_MOUSE;
 							input.mi.mouseData = 0;
-							input.mi.dx = (rt.left + 50) * 65536 / GetSystemMetrics(SM_CXSCREEN);
+							input.mi.dx = (rt.left + 6) * 65536 / GetSystemMetrics(SM_CXSCREEN);
 							input.mi.dy = (rt.top + 1) * 65536 / GetSystemMetrics(SM_CYSCREEN);
 							input.mi.dwFlags = MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE | MOUSEEVENTF_LEFTDOWN;
 							SendInput(1, &input, sizeof(input));
 
-							Sleep(100);
 							input.mi.dx = 0;
 							input.mi.dy = 0;
 							input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
@@ -82,7 +81,6 @@ std::vector<int> query_display_ids()
 {
 	std::vector<int> ids;
 	EnumDisplayMonitors(NULL, NULL, MonitorGetEnumProc, (LPARAM)&ids);
-	return ids;
 }
 
 bool set_active_display(int displayId)

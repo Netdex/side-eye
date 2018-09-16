@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <math.h>
 #include <opencv2/objdetect/objdetect.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include "constants.h"
@@ -72,9 +73,14 @@ Position Detector::findEyesInFace(cv::Mat frame_gray, cv::Rect faceRegion) {
 
 	// TODO: maybe averaging them is not the best idea?
 	// TODO: maybe a non-linear scale is better?
-	return Position{
+	Position p{
 		(leftPupilNormalizedPosition.x + rightPupilNormalizedPosition.x) / 2,
 		(leftPupilNormalizedPosition.y + rightPupilNormalizedPosition.y) / 2
+	};
+
+	return Position{
+		p.x >= 0 ? sqrt(p.x) : -sqrt(-p.x),
+		p.y >= 0 ? sqrt(p.y) : -sqrt(-p.y)
 	};
 }
 
@@ -118,7 +124,7 @@ Position Detector::samplePupilsPosition(int frames) {
 
 		imshow("Webcam", frame);
 
-		cv::waitKey(25);
+		cv::waitKey(10);
 	}
 
 	sample.x /= frames;

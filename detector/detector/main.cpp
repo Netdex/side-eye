@@ -9,8 +9,8 @@ int main(int argc, char** argv) {
 	int step = 0;
 	int count = 0;
 
-	double features[10][2] = { 0 };
-	double labels[] = { 0,0,0,0,0,1,1,1,1,1 };
+	double features[20][2] = { 0 };
+	double labels[] = { 0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1 };
 	std::vector<int> displays = query_display_ids();
 	std::cout << "detect " << displays.size() << " displays" << std::endl;
 	int cdisplay = displays[0];
@@ -25,16 +25,18 @@ int main(int argc, char** argv) {
 	svm_classifier *cls = nullptr;
 	while (true) {
 
-		if (count >= 5)
+		if (count >= 10)
 		{
 			count = 0;
 			if (step < 2)
 				step++;
 			if (step == 2 && !cls)
 			{
-				cls = new svm_classifier(10, features, labels);
+				cls = new svm_classifier(20, features, labels);
 			}
 		}
+		
+		if (step == 0 || step == 1) cv::waitKey(0);
 
 		Position pupilsPosition = d.samplePupilsPosition();
 
@@ -43,9 +45,8 @@ int main(int argc, char** argv) {
 		case 0:
 		case 1:
 			std::cout << "step: " << step << " - count: " << count << std::endl;
-			features[step * 5 + count][0] = pupilsPosition.x;
-			features[step * 5 + count][1] = pupilsPosition.y;
-			cv::waitKey(0);
+			features[step * 10 + count][0] = pupilsPosition.x;
+			features[step * 10 + count][1] = pupilsPosition.y;
 			break;
 		case 2:
 			int cl = cls->classify(pupilsPosition.x, pupilsPosition.y);
@@ -55,7 +56,6 @@ int main(int argc, char** argv) {
 				cdisplay = displays[cl];
 				set_active_display(cdisplay);
 			}
-			cv::waitKey(50);
 			break;
 		}
 
