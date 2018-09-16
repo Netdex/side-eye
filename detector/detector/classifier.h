@@ -24,8 +24,6 @@ public:
 	~svm_classifier();
 
 	double classify(double x, double y) const;
-
-
 };
 
 

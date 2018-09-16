@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <opencv2/core/core.hpp>
 #include "winsw.h"
 #include "classifier.h"
 #include "Detector.h"
