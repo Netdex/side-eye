@@ -116,6 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Detector.cpp" />
     <ClCompile Include="findEyeCenter.cpp" />
     <ClCompile Include="findEyeCorner.cpp" />
     <ClCompile Include="helpers.cpp" />
@@ -123,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constants.h" />
+    <ClInclude Include="Detector.h" />
     <ClInclude Include="findEyeCenter.h" />
     <ClInclude Include="findEyeCorner.h" />
     <ClInclude Include="helpers.h" />
