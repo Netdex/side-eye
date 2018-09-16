@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     QHBoxLayout *buttonLayout = new QHBoxLayout;
     QHBoxLayout *textLayout = new QHBoxLayout;
 
+    //std::cout << QCameraInfo::availableCameras().count();
+
     textLabel = new QLabel("Select a screen to begin the calibration\n\n\n");
     /*if (QCameraInfo::availableCameras().count() > 0) {
         textLabel->setText("greater than 0");
@@ -69,6 +71,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     buttonLayout->addWidget(buttonR);
 
     int displays = query_display_ids().size();
+    std::cout << "displays " << displays;
+    //int displays = 2;
 
     if (displays == 3) {
         QPixmap pixmapC("C:\\nellemaple\\Coding\\htn2018\\pics\\Cgrey.png");
